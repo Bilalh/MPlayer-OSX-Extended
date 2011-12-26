@@ -890,12 +890,12 @@ static AppController *instance = nil;
 				
 			case NX_KEYTYPE_FAST:
 				debugString = [@"Fastforward pressed" stringByAppendingString:debugString];
-				[[self getPlayer] skipToNextChapter];
+				[[self getPlayer] seek:10 mode:MISeekingModeRelative];
 				break;
 				
 			case NX_KEYTYPE_REWIND:
 				debugString = [@"Rewind pressed" stringByAppendingString:debugString];
-				[[self getPlayer] skipToPreviousChapter];
+				[[self getPlayer] seek:-10 mode:MISeekingModeRelative];
 				break;
 			default:
 				// More cases defined in hidsystem/ev_keymap.h
