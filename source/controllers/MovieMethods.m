@@ -142,6 +142,25 @@ static char ** ep_num (char *s);
 								   withObject:[NSNumber numberWithInt:newEpisodeNumber]] boolValue];
 						if (use){
 							nextPath = [dirPath stringByAppendingPathComponent:s];
+							
+							NSString *nname  = [[NSString alloc] initWithUTF8String:name];
+							NSString *bin    = [@"~/bin" stringByStandardizingPath];
+							NSString *epPath = [nextPath stringByReplacingOccurrencesOfString:@"\'" withString:@"'\"'\"'"];
+							
+							NSString *sys = [NSString stringWithFormat:@"cd %@ &&" 
+											 "./hista '%@' %ld;" 
+											 "./setLabel orange '%@';"
+											 "./hide_extension.applescript '%@';",
+											 
+											 bin,
+                                             [nname stringByReplacingOccurrencesOfString:@"\'" withString:@"'\"'\"'"], 
+                                             newEpisodeNumber,
+											 epPath,
+											 epPath]; 
+                            
+							[Debug log:ASL_LEVEL_DEBUG withMessage:@"sys=%@",sys ];
+                            system([sys UTF8String]);		
+							
 							free(result);
 							free(cName);
 							break;
