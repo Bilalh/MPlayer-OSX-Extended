@@ -1955,8 +1955,6 @@
 	else if ((keyHandled = ([characters isEqualToString:@"P"])))
 		[myPlayer sendCommand:@"osd_show_progression" withOSD:MISurpressCommandOutputNever andPausing:MICommandPausingKeep];
     
-<<<<<<< HEAD
-=======
 	
 	else if ((keyHandled = [characters isEqualToString:@","]))
 		[myPlayer sendCommand:@"pausing seek -0.04"withOSD:MISurpressCommandOutputConditionally andPausing:MICommandPausingNone];
@@ -1983,7 +1981,6 @@
 	}
 
 	
->>>>>>> db91b74... Allows Toggling Custom size
 	// Video equalizer
     if ([[movieInfo prefs] boolForKey:MPEVideoEqualizerEnabled]) {
         if ((keyHandled = ([characters isEqualToString:@"1"])))
