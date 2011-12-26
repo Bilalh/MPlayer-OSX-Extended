@@ -604,7 +604,9 @@ static unsigned int videoViewId;
 */
 - (void) mouseDown: (NSEvent *) theEvent
 {
-	if ([theEvent clickCount] == 2) {
+	if ([theEvent clickCount] == 1) {
+		[playerController playPause: self];
+	} else if ([theEvent clickCount] == 2) {
 		[playerController switchFullscreen: self];
 	
 	} else {
