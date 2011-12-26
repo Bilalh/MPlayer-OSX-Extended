@@ -1827,6 +1827,7 @@
 	
 	NSString *characters = [theEvent characters];
 	NSString *uCharacters = [theEvent charactersIgnoringModifiers];
+	NSUInteger flags = [theEvent modifierFlags] & NSDeviceIndependentModifierFlagsMask;
 	
 	// Volume
 	if ((keyHandled = [characters isEqualToString:@"b"]))
@@ -1952,6 +1953,35 @@
 	else if ((keyHandled = ([characters isEqualToString:@"P"])))
 		[myPlayer sendCommand:@"osd_show_progression" withOSD:MISurpressCommandOutputNever andPausing:MICommandPausingKeep];
     
+<<<<<<< HEAD
+=======
+	
+	else if ((keyHandled = [characters isEqualToString:@","]))
+		[myPlayer sendCommand:@"pausing seek -0.04"withOSD:MISurpressCommandOutputConditionally andPausing:MICommandPausingNone];
+	else if ((keyHandled = [characters isEqualToString:@"n"]))
+		[self seek:-5 mode:MISeekingModeRelative];
+	else if ((keyHandled = [characters isEqualToString:@"m"]))
+		[self seek:5 mode:MISeekingModeRelative];
+	
+
+	else if( flags == NSCommandKeyMask ){
+		if ((keyHandled = [characters isEqualToString:@"4"])){
+			if ([PREFS integerForKey:MPEDisplaySize] != MPEDisplaySizeCustom
+				&& [PREFS integerForKey:MPECustomSizeInPx] > 0) {		
+				
+				[PREFS setInteger:MPEDisplaySizeCustom forKey:MPEDisplaySize];
+				[self setMovieSize];		
+				
+			}else if ([PREFS integerForKey:MPEDisplaySize] == MPEDisplaySizeCustom){
+				[PREFS setInteger:MPEDisplaySizeOriginal forKey:MPEDisplaySize];
+				[self setMovieSize];		
+			}
+			
+		}
+	}
+
+	
+>>>>>>> db91b74... Allows Toggling Custom size
 	// Video equalizer
     if ([[movieInfo prefs] boolForKey:MPEVideoEqualizerEnabled]) {
         if ((keyHandled = ([characters isEqualToString:@"1"])))
