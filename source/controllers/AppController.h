@@ -25,7 +25,7 @@ extern NSString* const MPEPlayerNotificationPlayerControllerKey;
 extern NSString* const MPEPlayerStoppedNotification;
 
 @class AppleRemote, PlayerController, PreferencesController2, EqualizerController,
-PlayListController, MenuController, InspectorController, MovieInfo;
+PlayListController, MenuController, InspectorController, MovieInfo, SPMediaKeyTap;
 
 @protocol MovieInfoProvider;
 
@@ -35,7 +35,7 @@ PlayListController, MenuController, InspectorController, MovieInfo;
 	IBOutlet MenuController *menuController;
 	IBOutlet EqualizerController *equalizerController;
 	IBOutlet InspectorController *inspectorController;
-		
+	
 	// GUI outlets
 	IBOutlet id locationPanel;
 	IBOutlet id locationBox;
@@ -70,6 +70,7 @@ PlayListController, MenuController, InspectorController, MovieInfo;
 	PlayerController *activePlayer;
 	
 	id<MovieInfoProvider> movieInfoProvider;
+	SPMediaKeyTap *keyTap; // For media keys;
 }
 
 @property (nonatomic,readonly) MenuController *menuController;
