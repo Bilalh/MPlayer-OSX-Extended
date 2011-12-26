@@ -1829,7 +1829,7 @@
 	NSString *uCharacters = [theEvent charactersIgnoringModifiers];
 	
 	// Volume
-	if ((keyHandled = [characters isEqualToString:@"m"]))
+	if ((keyHandled = [characters isEqualToString:@"b"]))
 		[self toggleMute:self];
 	else if ((keyHandled = ([characters isEqualToString:@"9"]
 						   || [uCharacters isEqualToString:@"/"])))
@@ -1888,6 +1888,14 @@
 		[self seek:-[PREFS floatForKey:MPESeekStepLarge] mode:MISeekingModeRelative];
 	else if ((keyHandled = ([theEvent keyCode] == kVK_PageUp)))
 		[self seek:[PREFS floatForKey:MPESeekStepLarge] mode:MISeekingModeRelative];
+	
+	//	Personal Keybindings
+	else if ((keyHandled = [characters isEqualToString:@","]))
+			[myPlayer sendCommand:@"pausing seek -0.04"withOSD:MISurpressCommandOutputConditionally andPausing:MICommandPausingNone];
+	else if ((keyHandled = [characters isEqualToString:@"n"]))
+				[self seek:-5 mode:MISeekingModeRelative];
+	else if ((keyHandled = [characters isEqualToString:@"m"]))
+				[self seek:5 mode:MISeekingModeRelative];
 	
 	// Cycle Streams
 	else if ((keyHandled = [characters isEqualToString:@"j"]))
