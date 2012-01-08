@@ -37,4 +37,6 @@
 				   inFormats:(NSSet*)exts
 					  accept:(SEL)accept;
 
++ (void) addToHistory:(NSString*)filepath;
+
 @end

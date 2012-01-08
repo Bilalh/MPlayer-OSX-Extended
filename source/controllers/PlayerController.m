@@ -1980,6 +1980,9 @@
 		}
 	}
 
+	else if( flags == NSControlKeyMask  && (keyHandled = [uCharacters isEqualToString:@"e"]) ){
+		[MovieMethods addToHistory:[movieInfo filename]];
+	}
 	
 	// Video equalizer
     if ([[movieInfo prefs] boolForKey:MPEVideoEqualizerEnabled]) {

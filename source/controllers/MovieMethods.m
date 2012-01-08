@@ -266,4 +266,42 @@ static char **ep_num (char *s)
 	return ans;
 }
 
++ (void) addToHistory:(NSString*)filepath
+{
+	[Debug log:ASL_LEVEL_DEBUG withMessage:@"filepath=%@",filepath ];
+	NSString *movieName = [[filepath lastPathComponent] stringByDeletingPathExtension];
+	char* cMovieName = strdup([movieName UTF8String]);
+	char **ans = ep_num(cMovieName);
+	if (ans[0] != NULL) { // The filename was parsed successfully 
+		// Gets the episodeNumber		
+		long episodeNumber = strtol(ans[0] + 1, NULL, 10);
+		if (episodeNumber == 0 ) episodeNumber++;  
+		
+		// Get the series name 
+		int index = ans[1] != NULL ? 1 : 0;
+		char name[ ans[index] - cMovieName + 1];
+		strncpy(name, cMovieName, ans[index] - cMovieName);
+		name[ans[index] - cMovieName] = '\0';   
+		
+		free(ans);
+		free(cMovieName);
+		
+		NSString *nname  = [[NSString alloc] initWithUTF8String:name];
+		NSString *bin    = [@"~/bin" stringByStandardizingPath];
+		NSString *epPath = [filepath stringByReplacingOccurrencesOfString:@"\'" withString:@"'\"'\"'"];
+		NSString *sys = [NSString stringWithFormat:@"cd %@ &&" 
+						 "./hista '%@' %ld;" 
+						 "./setLabel orange '%@';"
+						 "./hide_extension.applescript '%@';",
+						 
+						 bin,
+						 [nname stringByReplacingOccurrencesOfString:@"\'" withString:@"'\"'\"'"], 
+						 episodeNumber,
+						 epPath,
+						 epPath]; 
+		[Debug log:ASL_LEVEL_DEBUG withMessage:@"sys=%@",sys ];
+		system([sys UTF8String]);
+	}
+}
+
 @end
