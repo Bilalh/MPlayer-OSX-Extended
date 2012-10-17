@@ -144,19 +144,13 @@ static char ** ep_num (char *s);
 							nextPath = [dirPath stringByAppendingPathComponent:s];
 							
 							NSString *nname  = [[NSString alloc] initWithUTF8String:name];
-							NSString *bin    = [@"~/bin" stringByStandardizingPath];
-							NSString *epPath = [nextPath stringByReplacingOccurrencesOfString:@"\'" withString:@"'\"'\"'"];
+							NSString *bin    = [@"~Library/Haskell/bin/" stringByStandardizingPath];
 							
 							NSString *sys = [NSString stringWithFormat:@"cd %@ &&" 
-											 "./hista '%@' %ld;" 
-											 "./setLabel orange '%@';"
-											 "./hide_extension.applescript '%@';",
-											 
+											 "./hista '%@' %ld;",
 											 bin,
                                              [nname stringByReplacingOccurrencesOfString:@"\'" withString:@"'\"'\"'"], 
-                                             newEpisodeNumber,
-											 epPath,
-											 epPath]; 
+                                             newEpisodeNumber];
                             
 							[Debug log:ASL_LEVEL_DEBUG withMessage:@"sys=%@",sys ];
                             system([sys UTF8String]);		

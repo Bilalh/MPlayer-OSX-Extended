@@ -1860,7 +1860,9 @@
     // Playlist
     else if ((keyHandled = ([theEvent keyCode] == kVK_Home)))
 		[self skipForwardIncludingChapters:NO];
-    else if ((keyHandled = ([theEvent keyCode] == kVK_End)))
+    else if
+		
+		((keyHandled = ([theEvent keyCode] == kVK_End)))
 		[self skipBackwardIncludingChapters:NO];
     else if ((keyHandled = ([characters isEqualToString:@">"]
                             || [characters isEqualToString:@"@"])))
